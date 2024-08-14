@@ -6,6 +6,11 @@ const Country = ({ countries, deleteCountry }) => {
     return country.goldMedals + country.silverMedals + country.bronzeMedals;
   };
 
+  // 정렬된 국가 목록 생성 (총 메달 갯수 순)
+  const sortedCountries = [...countries].sort(function (a, b) {
+    return getTotalMedals(b) - getTotalMedals(a);
+  });
+
   return (
     <div>
       {
@@ -22,7 +27,7 @@ const Country = ({ countries, deleteCountry }) => {
             </tr>
           </thead>
           <tbody>
-            {countries.map((country) => (
+            {sortedCountries.map((country) => (
               <tr key={country.id}>
                 <td>{country.countryName}</td>
                 <td>{getTotalMedals(country)}</td>
